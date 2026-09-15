@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPostData } from "@/lib/blogs";
-import BlogMedia, {
-  type BlogMediaKind,
-} from "@/components/blog/BlogMedia";
+import { getPostData, getSortedPosts } from "@/lib/blogs";
 
-const mediaMarker = /<p>\[\[media:(cracked|community|food)\]\]<\/p>/g;
+export function generateStaticParams() {
+  return getSortedPosts().map((post) => ({ slug: post.slug || post.id }));
+}
 
 const Post = async ({ params }: { params: { slug: string } }) => {
   let post;
@@ -19,27 +18,20 @@ const Post = async ({ params }: { params: { slug: string } }) => {
   return (
     <article className="article-page">
       <header className="article-header">
-        <p className="article-category">{post.category}</p>
         <h1>{post.title}</h1>
         {post.description && <p className="article-deck">{post.description}</p>}
         <div className="article-meta">
+          {post.category && <span>{post.category}</span>}
           <time>{post.date}</time>
           <span>{post.readTime} min read</span>
         </div>
       </header>
 
       <div className="post">
-        {post.contentHtml.split(mediaMarker).map((part, index) =>
-          index % 2 === 0 ? (
-            <div
-              className="post-copy"
-              dangerouslySetInnerHTML={{ __html: part }}
-              key={`copy-${index}`}
-            />
-          ) : (
-            <BlogMedia kind={part as BlogMediaKind} key={`media-${part}`} />
-          ),
-        )}
+        <div
+          className="post-copy"
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+        />
       </div>
 
       <footer className="article-footer">

@@ -1,5 +1,8 @@
 node_modules/
 .next/
+.next-dev/
+out/
+*.tsbuildinfo
 .DS_Store
 .vscode/
 .env

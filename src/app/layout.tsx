@@ -2,28 +2,24 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import "@fontsource-variable/inter";
 import "./globals.css";
+import AmbientArt from "@/components/AmbientArt";
+import AmbientSceneProvider from "@/components/ambient/AmbientSceneProvider";
 import ContentWrapper from "@/components/ContentWrapper";
 import BackButton from "@/components/BackButton";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://site-eta-lime-98.vercel.app"),
-  title: "aadithyan rajesh",
-  description: "founding engg at context.dev, making the web usable by ai.",
-  icons: {
-    icon: "/favicon_aadi.png",
-    shortcut: "/favicon_aadi.png",
-    apple: "/favicon_aadi.png",
-  },
+  // Placeholder — set this to your real domain before launch.
+  metadataBase: new URL("https://your-domain.com"),
+  title: "fayyaz ameen",
+  description: "placeholder — one line about what you do.",
   openGraph: {
-    title: "aadithyan rajesh",
-    description: "founding engg at context.dev, making the web usable by ai.",
-    images: ["/opengraph-image.png"],
+    title: "fayyaz ameen",
+    description: "placeholder — one line about what you do.",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "aadithyan rajesh",
-    description: "founding engg at context.dev, making the web usable by ai.",
-    images: ["/opengraph-image.png"],
+    card: "summary",
+    title: "fayyaz ameen",
+    description: "placeholder — one line about what you do.",
   },
 };
 
@@ -35,12 +31,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="firefox-scrollbar-fix min-h-screen">
-          <ContentWrapper>
-            <BackButton />
-            {children}
-          </ContentWrapper>
-        </main>
+        <AmbientSceneProvider>
+          <main className="firefox-scrollbar-fix min-h-screen">
+            <ContentWrapper>
+              <BackButton />
+              {children}
+              <AmbientArt variant="bottom" />
+            </ContentWrapper>
+          </main>
+          <AmbientArt />
+        </AmbientSceneProvider>
         <Analytics />
       </body>
     </html>

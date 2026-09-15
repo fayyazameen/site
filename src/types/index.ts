@@ -4,5 +4,5 @@ export type PostItem = {
   date: string;
   category: string;
   description?: string;
-  slug?: string; // Add slug as it's used in PostPreview
+  slug?: string;
 };

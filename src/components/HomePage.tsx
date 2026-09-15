@@ -5,7 +5,8 @@ import {
   PiLinkedinLogo,
   PiX,
 } from "react-icons/pi";
-import IdentityHover from "@/components/IdentityHover";
+import Magnetic from "@/components/Magnetic";
+import NameReveal from "@/components/NameReveal";
 import { LinkPreview } from "@/components/ui/LinkPreview";
 import type { PostItem } from "@/types";
 
@@ -21,20 +22,16 @@ const HomePage = ({ posts }: HomePageProps) => {
       <section className="home-main">
         <header className="portfolio-header">
           <p className="portfolio-greeting">hello, hola, مرحباً</p>
-          <IdentityHover>
-            <h1>aadithyan rajesh</h1>
-            <p className="portfolio-role">
-              20 · founding engg at{" "}
-              <a href="https://context.dev/">context.dev</a> (yc s26)
-            </p>
-          </IdentityHover>
+          <NameReveal text="fayyaz ameen" />
+          <p className="portfolio-role">
+            your role at <a href="https://example.com">your company</a>
+          </p>
         </header>
 
         <div className="site-copy home-intro">
           <p>
-            i work across engineering, product and growth at{" "}
-            <LinkPreview url="https://context.dev/">context.dev</LinkPreview>,
-            making the web usable by ai.
+            this is a placeholder intro. replace it with one sentence about
+            what you do and what you care about.
           </p>
 
           <details className="bio-details">
@@ -44,63 +41,23 @@ const HomePage = ({ posts }: HomePageProps) => {
             </summary>
             <div className="bio-more">
               <p>
-                my obsession with computers started when i was eight. i wanted
-                to understand how things worked, then learned to code so i
-                could make my own.
+                everything in this section is placeholder copy. use one short
+                paragraph per chapter of your story, most recent first.
               </p>
               <p>
-                at{" "}
-                <LinkPreview url="https://context.dev/">context.dev</LinkPreview>,
-                i move between engineering, product and growth, wherever the
-                biggest problem is.
-              </p>
-              <p>
-                i built{" "}
-                <LinkPreview url="https://www.getnisaa.com/">
-                  nisaa
-                </LinkPreview>{" "}
-                , a first of its kind period tracker for muslim women, and grew
-                it to 3,000+ users organically.
-              </p>
-              <p>
-                i researched spiking neural networks at{" "}
-                <LinkPreview url="https://ebrain4everyone.com/">
-                  nyu&apos;s ebrain lab
-                </LinkPreview>
-                .
-              </p>
-              <p>
-                after olostep, i interned with the investments and data team at{" "}
-                <LinkPreview url="https://www.becocapital.com/">
-                  beco capital
-                </LinkPreview>
-                , mena&apos;s biggest vc.
-              </p>
-              <p>
-                before that, i was a founding engineer at{" "}
-                <LinkPreview url="https://www.olostep.com/">
-                  olostep
-                </LinkPreview>
-                , working on data extraction infrastructure for ai companies.
-              </p>
-              <p>
-                i&apos;ve also founded and exited a startup, and worked across a
-                bunch of other roles. the full trail is on{" "}
-                <a href="https://www.linkedin.com/in/aadithyanrajesh/">
-                  linkedin
-                </a>
-                .
+                links can show a live preview on hover, like{" "}
+                <LinkPreview url="https://github.com">github</LinkPreview>.
+                use them when you mention companies or projects.
               </p>
             </div>
           </details>
 
           <div className="investing-note">
-            <p className="investing-label">investing</p>
+            <p className="investing-label">placeholder section</p>
             <p>
-              i&apos;m looking to write $1k to $5k checks into early ai,
-              developer tools and deep tech startups.{" "}
-              <a href="mailto:aadithyan@context.dev">email me</a>
-              .
+              use this bordered block for a callout you want people to see,
+              like investing, hiring or collaborations.{" "}
+              <a href="mailto:fayyameen@gmail.com">email me</a>.
             </p>
           </div>
 
@@ -111,34 +68,42 @@ const HomePage = ({ posts }: HomePageProps) => {
         </div>
 
         <nav className="social-links" aria-label="contact links">
-          <a
-            href="https://x.com/aadithyanr"
-            aria-label="aadithyan on x"
-            title="x"
-          >
-            <PiX aria-hidden="true" />
-          </a>
-          <a
-            href="https://github.com/aadithyanr"
-            aria-label="aadithyan on github"
-            title="github"
-          >
-            <PiGithubLogo aria-hidden="true" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/aadithyanrajesh/"
-            aria-label="aadithyan on linkedin"
-            title="linkedin"
-          >
-            <PiLinkedinLogo aria-hidden="true" />
-          </a>
-          <a
-            href="mailto:aadithyan@context.dev"
-            aria-label="email aadithyan"
-            title="email"
-          >
-            <PiEnvelopeSimple aria-hidden="true" />
-          </a>
+          <Magnetic>
+            <a
+              href="https://x.com/fayyaza"
+              aria-label="fayyaz on x"
+              title="x"
+            >
+              <PiX aria-hidden="true" />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="https://github.com/yourusername"
+              aria-label="fayyaz on github"
+              title="github"
+            >
+              <PiGithubLogo aria-hidden="true" />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="https://www.linkedin.com/in/fayyazameen/"
+              aria-label="fayyaz on linkedin"
+              title="linkedin"
+            >
+              <PiLinkedinLogo aria-hidden="true" />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="mailto:fayyameen@gmail.com"
+              aria-label="email fayyaz"
+              title="email"
+            >
+              <PiEnvelopeSimple aria-hidden="true" />
+            </a>
+          </Magnetic>
         </nav>
       </section>
 
@@ -157,6 +122,7 @@ const HomePage = ({ posts }: HomePageProps) => {
           </Link>
         </aside>
       )}
+
     </div>
   );
 };

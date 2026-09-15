@@ -1,23 +1,23 @@
-import LinkArrow from "@/components/LinkArrow";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "404 | Aadithyan Rajesh",
-  description: "Uh oh! This page does not exist",
+  title: "404 | fayyaz ameen",
+  description: "this page does not exist",
 };
 
-const Custom404 = (): JSX.Element => (
-  <div className="flex flex-col gap-4 animate-10">
-    <h1 className="font-serif text-3xl font-medium tracking-tight text-neutral-900">
-      404, Page Not Found
-    </h1>
-    <p className="text-neutral-400 text-sm">
-      The page you are looking for does not exist.
-    </p>
-    <LinkArrow href="/" className="text-sm text-neutral-400">
-      Back to Home
-    </LinkArrow>
-  </div>
+const NotFound = () => (
+  <section className="writing-index">
+    <header className="writing-index-header">
+      <h1>404</h1>
+      <p>the page you are looking for does not exist.</p>
+    </header>
+    <div className="site-copy">
+      <p>
+        <Link href="/">back home</Link>
+      </p>
+    </div>
+  </section>
 );
 
-export default Custom404;
+export default NotFound;

@@ -12,7 +12,7 @@ type LinkPreviewProps = {
 
 export const LinkPreview = ({ children, url }: LinkPreviewProps) => {
   const isExternal = /^https?:\/\//.test(url);
-  const absoluteUrl = new URL(url, "https://aadithyanrajesh.com").toString();
+  const absoluteUrl = new URL(url, "https://your-domain.com").toString();
   const domain = new URL(absoluteUrl).hostname.replace(/^www\./, "");
   const src = `https://api.microlink.io/?${encode({
     url: absoluteUrl,

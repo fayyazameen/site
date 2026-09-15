@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import { projects } from "@/data/projects";
 
 export default function Projects() {
@@ -9,12 +10,14 @@ export default function Projects() {
       </header>
 
       <div className="site-copy">
-        {projects.map((project) => (
-          <p key={project.title}>
-            <a href={project.link}>{project.title}</a>
-            <br />
-            <span className="site-muted">{project.description}</span>
-          </p>
+        {projects.map((project, index) => (
+          <Reveal delay={Math.min(index * 0.05, 0.3)} key={project.title}>
+            <p>
+              <a href={project.link}>{project.title}</a>
+              <br />
+              <span className="site-muted">{project.description}</span>
+            </p>
+          </Reveal>
         ))}
       </div>
     </section>
