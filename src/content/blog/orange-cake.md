@@ -16,10 +16,11 @@ and let me go ahead and tell you absolutely nothing about it
 
 ---
 
-do you know what is special about a 0.5mm mechanical pencil? in reverse order of importance  
-3. it's where i get the best handwriting with a pencil  
-2. 0.5mm >>>>> 0.7mm  
-1.
+do you know what is special about a 0.5mm mechanical pencil? in reverse order of importance
+
+3. it's where i get the best handwriting with a pencil
+4. 0.5mm >>>>> 0.7mm
+5.
 
 the last one is for me to cherish, maybe next time.
 
