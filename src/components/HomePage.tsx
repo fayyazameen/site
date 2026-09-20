@@ -9,6 +9,7 @@ import Magnetic from "@/components/Magnetic";
 import NameReveal from "@/components/NameReveal";
 import { LinkPreview } from "@/components/ui/LinkPreview";
 import type { PostItem } from "@/types";
+import PostSourceLabel from "@/components/PostSourceLabel";
 
 type HomePageProps = {
   posts: PostItem[];
@@ -30,8 +31,8 @@ const HomePage = ({ posts }: HomePageProps) => {
 
         <div className="site-copy home-intro">
           <p>
-            this is a placeholder intro. replace it with one sentence about
-            what you do and what you care about.
+            this is a placeholder intro. replace it with one sentence about what
+            you do and what you care about.
           </p>
 
           <details className="bio-details">
@@ -46,8 +47,8 @@ const HomePage = ({ posts }: HomePageProps) => {
               </p>
               <p>
                 links can show a live preview on hover, like{" "}
-                <LinkPreview url="https://github.com">github</LinkPreview>.
-                use them when you mention companies or projects.
+                <LinkPreview url="https://github.com">github</LinkPreview>. use
+                them when you mention companies or projects.
               </p>
             </div>
           </details>
@@ -55,8 +56,8 @@ const HomePage = ({ posts }: HomePageProps) => {
           <div className="investing-note">
             <p className="investing-label">placeholder section</p>
             <p>
-              use this bordered block for a callout you want people to see,
-              like investing, hiring or collaborations.{" "}
+              use this bordered block for a callout you want people to see, like
+              investing, hiring or collaborations.{" "}
               <a href="mailto:fayyameen@gmail.com">email me</a>.
             </p>
           </div>
@@ -69,17 +70,13 @@ const HomePage = ({ posts }: HomePageProps) => {
 
         <nav className="social-links" aria-label="contact links">
           <Magnetic>
-            <a
-              href="https://x.com/fayyaza"
-              aria-label="fayyaz on x"
-              title="x"
-            >
+            <a href="https://x.com/fayyaza" aria-label="fayyaz on x" title="x">
               <PiX aria-hidden="true" />
             </a>
           </Magnetic>
           <Magnetic>
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/fayyazameen"
               aria-label="fayyaz on github"
               title="github"
             >
@@ -113,7 +110,10 @@ const HomePage = ({ posts }: HomePageProps) => {
           <ul>
             {recentPosts.map((post) => (
               <li key={post.id}>
-                <Link href={`/blog/${post.slug || post.id}`}>{post.title}</Link>
+                <Link href={`/blog/${post.slug || post.id}`}>
+                  <span>{post.title}</span>
+                  <PostSourceLabel source={post.source} />
+                </Link>
               </li>
             ))}
           </ul>
@@ -122,7 +122,6 @@ const HomePage = ({ posts }: HomePageProps) => {
           </Link>
         </aside>
       )}
-
     </div>
   );
 };

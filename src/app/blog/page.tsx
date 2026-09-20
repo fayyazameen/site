@@ -2,6 +2,7 @@ import Link from "next/link";
 import moment from "moment";
 import Reveal from "@/components/Reveal";
 import { getSortedPosts } from "@/lib/blogs";
+import PostSourceLabel from "@/components/PostSourceLabel";
 
 export default function Blog() {
   const posts = getSortedPosts();
@@ -22,9 +23,20 @@ export default function Blog() {
                 href={`/blog/${post.slug || post.id}`}
               >
                 <div className="writing-item-topline">
-                  <h2>{post.title}</h2>
-                  <time dateTime={post.date}>
-                    {moment(post.date, "MM-DD-YYYY").format("MMM YYYY")}
+                  <div className="writing-item-title">
+                    <h2>{post.title}</h2>
+                    <PostSourceLabel source={post.source} />
+                  </div>
+                  <time dateTime={post.dateTime}>
+                    {moment
+                      .utc(post.date, "MM-DD-YYYY", true)
+                      .format("MMM D, YYYY")}
+                    {post.time && (
+                      <>
+                        <span aria-hidden="true"> · </span>
+                        {post.time}
+                      </>
+                    )}
                   </time>
                 </div>
                 {post.description && <p>{post.description}</p>}

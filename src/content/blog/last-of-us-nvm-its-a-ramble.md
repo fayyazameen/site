@@ -1,6 +1,7 @@
 ---
 title: "last of us — nvm its a ramble"
 category: "Personal"
+source: "medium"
 date: "07-04-2020"
 description: "The title probably reminds you of the game? lol that’s not exactly what I was going for, but like who am I to dictate where your thought goes? The one who is..."
 ---

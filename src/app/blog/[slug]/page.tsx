@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostData, getSortedPosts } from "@/lib/blogs";
+import PostSourceLabel from "@/components/PostSourceLabel";
 
 export function generateStaticParams() {
   return getSortedPosts().map((post) => ({ slug: post.slug || post.id }));
@@ -22,8 +23,17 @@ const Post = async ({ params }: { params: { slug: string } }) => {
         {post.description && <p className="article-deck">{post.description}</p>}
         <div className="article-meta">
           {post.category && <span>{post.category}</span>}
-          <time>{post.date}</time>
+          <time dateTime={post.dateTime}>
+            {post.date}
+            {post.time && (
+              <>
+                <span aria-hidden="true"> · </span>
+                {post.time}
+              </>
+            )}
+          </time>
           <span>{post.readTime} min read</span>
+          <PostSourceLabel source={post.source} />
         </div>
       </header>
 

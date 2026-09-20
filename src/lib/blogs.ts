@@ -5,7 +5,8 @@ import moment from "moment";
 import { remark } from "remark";
 import html from "remark-html";
 
-import { PostItem } from "@/types";
+import type { PostItem } from "@/types";
+import { getPublicationDetails } from "./post-publication";
 
 const postsDirectory = path.join(process.cwd(), "src", "content", "blog");
 
@@ -16,12 +17,15 @@ export const removeDashes = (value: string = "") =>
     .replace(/\s+-\s+/g, ", ");
 
 const removeDashesFromHtml = (value: string) =>
-  value.replace(/(^|>)([^<]+)(?=<|$)/g, (_, opening, text) =>
-    `${opening}${removeDashes(text)}`,
+  value.replace(
+    /(^|>)([^<]+)(?=<|$)/g,
+    (_, opening, text) => `${opening}${removeDashes(text)}`,
   );
 
 const getSortedPosts = (): PostItem[] => {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = fs
+    .readdirSync(postsDirectory)
+    .filter((name) => name.endsWith(".md"));
 
   const allPostsData = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, "");
@@ -36,8 +40,12 @@ const getSortedPosts = (): PostItem[] => {
     if (!description) {
       const content = matterResult.content;
       // Simple extraction of first paragraph or first 200 chars
-      const firstParagraph = content.split("\n\n")[0].replace(/^#+\s.*$/gm, "").trim(); // Remove headers
-      description = firstParagraph.length > 0 ? firstParagraph.slice(0, 160) + "..." : "";
+      const firstParagraph = content
+        .split("\n\n")[0]
+        .replace(/^#+\s.*$/gm, "")
+        .trim(); // Remove headers
+      description =
+        firstParagraph.length > 0 ? firstParagraph.slice(0, 160) + "..." : "";
     }
 
     return {
@@ -45,23 +53,17 @@ const getSortedPosts = (): PostItem[] => {
       slug: id,
       title: removeDashes(matterResult.data.title),
       date: matterResult.data.date,
+      ...getPublicationDetails(
+        matterResult.data.date,
+        matterResult.data.time,
+        matterResult.data.source,
+      ),
       category: removeDashes(matterResult.data.category),
       description: removeDashes(description),
     };
   });
 
-  return allPostsData.sort((a, b) => {
-    const format = "MM-DD-YYYY"; // Updated format based on aiproducts.md
-    const dateA = moment(a.date, format);
-    const dateB = moment(b.date, format);
-    if (dateA.isBefore(dateB)) {
-      return 1; // Sort descending
-    } else if (dateA.isAfter(dateB)) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+  return allPostsData.sort((a, b) => b.dateTime.localeCompare(a.dateTime));
 };
 
 export const getCategorizedPosts = (): Record<string, PostItem[]> => {
@@ -101,7 +103,14 @@ export const getPostData = async (id: string) => {
     title: removeDashes(matterResult.data.title),
     category: removeDashes(matterResult.data.category),
     description: removeDashes(matterResult.data.description || ""),
-    date: moment(matterResult.data.date, "MM-DD-YYYY").format("MMMM D, YYYY"),
+    date: moment
+      .utc(matterResult.data.date, "MM-DD-YYYY", true)
+      .format("MMMM D, YYYY"),
+    ...getPublicationDetails(
+      matterResult.data.date,
+      matterResult.data.time,
+      matterResult.data.source,
+    ),
     readTime: Math.max(1, Math.ceil(wordCount / 220)),
   };
 };
